@@ -1,0 +1,13 @@
+Django==3.2.15
+django_extra_fields==3.0.2
+django_filter==21.1
+django_location_field==2.1.0
+djangorestframework==3.14.0
+djangorestframework_simplejwt==4.8.0
+drf_extra_fields==3.4.1
+grpc==1.0.0
+grpcio==1.46.3
+numpy==1.21.5
+pytz==2018.3
+PyYAML==6.0
+requests==2.18.4
