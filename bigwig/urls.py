@@ -32,7 +32,7 @@ from rest_framework_simplejwt.views import (
 
 # import project
 
-from projects.api import ProjectView,ProjectTaskView
+from projects.api import ProjectView,ProjectTaskView,ProjectInviteView
 
 # import stories
 
@@ -118,6 +118,8 @@ router.register(r'feedback',FeedBackView)
 
 router.register(r'projects',ProjectView)
 router.register(r'projectask',ProjectTaskView)
+router.register(r'projectinvite',ProjectInviteView)
+
 
 
 

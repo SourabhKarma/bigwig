@@ -127,6 +127,7 @@ class TextRoomConsumer(AsyncWebsocketConsumer):
         group  = await self.get_groupid(groupid)
         # print(group)
         time = text_data_json['time']
+        url = text_data_json['url']
 
         await self.create_chat(sender ,text,group,time,user)  
 
@@ -141,6 +142,7 @@ class TextRoomConsumer(AsyncWebsocketConsumer):
                 'userid':userid,
                 'time':time,
                 'groupid':groupid,
+                'url':url,
             }
         )
 
@@ -169,6 +171,7 @@ class TextRoomConsumer(AsyncWebsocketConsumer):
         time = event['time']
         user  = event['userid']
         group = event['groupid']
+        url = event["url"]
 
         # Send message to WebSocket
         # await self.create_chat(sender ,text)  # It is necessary to await creation of messages
@@ -180,6 +183,7 @@ class TextRoomConsumer(AsyncWebsocketConsumer):
             'userid':user,
             'time':time,
             'groupid':group,
+            'url':url,
         }))
 
 

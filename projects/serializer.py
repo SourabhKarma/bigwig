@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import ProjectModel,ProjectTask
+from .models import ProjectModel,ProjectTask,ProjectInvite
 
 
 
@@ -22,6 +22,12 @@ class ProjectTaskupdateSerializer(serializers.ModelSerializer):
 
 
 
+
+class ProjectInviteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProjectInvite
+        fields = '__all__'
 
 
 

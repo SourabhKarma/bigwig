@@ -43,6 +43,7 @@ class EventModel(models.Model):
 
 
 
+
 class EventlikeModel(models.Model):
 
     userid = models.ForeignKey("user.User",null=True,blank=True,on_delete=models.DO_NOTHING)

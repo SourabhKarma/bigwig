@@ -59,6 +59,9 @@ INSTALLED_APPS = [
     'groupchat',
     'advertisement',
     'corsheaders',
+    'videocall',
+    'broadcast',
+    'fcm_django',
 
     'location_field.apps.DefaultConfig',
 ]
@@ -105,7 +108,6 @@ REST_FRAMEWORK = {
 }
 
 
-
 # Jwt Token Settings
 
 
@@ -142,7 +144,9 @@ SIMPLE_JWT = {
 }
 
 
-
+FCM_DJANGO_SETTINGS = {
+    "FCM_SERVER_KEY": "BBDY7Q-t70t587gd-gOEieks7hGkXVi5NICB1PPb_SF-jJwcdpOBZ-gI9Q7ZQKHhGSUwwm6QqEHn0_GgS8RmFsQ"
+}
 
 
 

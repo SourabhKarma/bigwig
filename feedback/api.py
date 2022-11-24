@@ -5,9 +5,17 @@ from rest_framework.permissions import AllowAny
 from .models import FeedBack
 from .serializer import FeedBackSerializer
 from rest_framework import pagination,generics
+from rest_framework.response import Response
+
+
+
+
 
 class FeedBackPage(pagination.PageNumberPagination):
     page_size = 1
+
+    def get_paginated_response(self, data):
+        return Response(data)
 
 
 class FeedBackView(viewsets.ModelViewSet):

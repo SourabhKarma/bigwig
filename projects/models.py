@@ -43,6 +43,19 @@ class ProjectModel(models.Model):
               return self.project_name
 
 
+
+
+class ProjectInvite(models.Model):
+    projectid = models.ForeignKey(ProjectModel,null=True,blank=True,on_delete=models.DO_NOTHING)
+    userinvite = models.ForeignKey("user.User",null=True,blank=True,on_delete=models.DO_NOTHING)
+    invite_status = models.BooleanField(null=True,blank=True,default=0)
+    class Meta:
+        unique_together = ("projectid", "invite_status")
+
+
+
+
+
 class ProjectTask(models.Model):
     projectid = models.ForeignKey(ProjectModel,null=True,blank=True,on_delete=models.DO_NOTHING)
     task_name  = models.CharField(max_length=200,null=True,blank=True)

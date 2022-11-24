@@ -12,7 +12,8 @@ from urllib.request import urlopen
 from tempfile import NamedTemporaryFile
 from urllib import request
 import base64
-
+from django.db.models import signals
+from django.dispatch import receiver 
 
 
 class StoriesModel(models.Model):
@@ -73,12 +74,22 @@ class StoriesLikeModel(models.Model):
 
 class Item(models.Model):
     image_file = models.FileField(blank=True,default='1.jpg')
-    image_url = models.URLField()
-    image_urls = models.URLField()
+    image_url = models.URLField(null=True)
+    image_urls = models.URLField(null = True)
 
     image_name = models.CharField(max_length=200,null=True,blank=True)
 
 
+@receiver(signals.post_save, sender=Item) 
+def create_Item(sender, instance, created, **kwargs):
+    print("Save method is called")
+
+
+@receiver(signals.pre_save, sender=Item)
+def check_product_description(sender, instance, **kwargs):
+    if not instance.image_url:
+        print("instance is print")
+        instance.image_url = 'http://127.0.0.1:8000/api/v1/item/' 
 
     # def get_remote_image(self,*args, **kwargs):
     #     if self.image_url and not self.image_file:
@@ -103,16 +114,22 @@ class Item(models.Model):
     #     super(Item, self).save(*args, **kwargs)
 
 
-    def save(self, *args, **kwargs):
-        if self.image_url and  self.image_file == '1.jpg':
-            result = request.urlretrieve(self.image_url)
-            self.image_file.save(
-                    os.path.basename(self.image_url),
-                    File(open(result[0], 'rb')))
-        super(Item, self).save(*args, **kwargs)
 
 
-        image_name_encode = self.image_name
-        image_name_encode_str = base64.b64encode(bytes(str(image_name_encode),"utf_8"))
-        self.image_name = image_name_encode_str.decode("utf-8")
+
+
+#   -------------- main ---------------
+
+    # def save(self, *args, **kwargs):
+    #     if self.image_url and  self.image_file == '1.jpg':
+    #         result = request.urlretrieve(self.image_url)
+    #         self.image_file.save(
+    #                 os.path.basename(self.image_url),
+    #                 File(open(result[0], 'rb')))
+    #     super(Item, self).save(*args, **kwargs)
+
+
+    #     image_name_encode = self.image_name
+    #     image_name_encode_str = base64.b64encode(bytes(str(image_name_encode),"utf_8"))
+    #     self.image_name = image_name_encode_str.decode("utf-8")
 

@@ -1,5 +1,5 @@
 from django.db import models
-
+import base64
 # Create your models here.
 
 
@@ -37,8 +37,27 @@ class Message(models.Model):
     userid =  models.ForeignKey("user.User",on_delete=models.DO_NOTHING,null=True,blank=True)
     groupInt= models.IntegerField(null=True,blank=True,)
 
-    def last_message(self):
-        return Message.objects.order_by('time').all()[:20]
+    def save(self, *args, **kwargs):
+        # event_name_encode = self.event_name
+        # event_name_encode_str = base64.b64encode(bytes(str(event_name_encode),"utf_8"))
+        # self.event_name = event_name_encode_str.decode("utf-8")
+
+        # event_name_encode = self.message
+        # event_name_encode_str = base64.b64encode(bytes(str(self.message),"utf_8"))
+        self.message = base64.b64encode(bytes(str(self.message),"utf_8")).decode("utf-8")
+        self
+
+        super(Message, self).save(*args,**kwargs)
+
+
+
+
+
+
+
+
+    # def last_message(self):
+    #     return Message.objects.order_by('time').all()[:20]
 
     class Meta:
         ordering = ['time']
