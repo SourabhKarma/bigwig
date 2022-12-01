@@ -14,7 +14,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.generics import CreateAPIView
 
-
+from broadcast.models import send_notification
 
 
 
@@ -109,9 +109,6 @@ class area_view(viewsets.ModelViewSet):
 
 
 
-
-
-
 class ward_view(viewsets.ModelViewSet):
 
     queryset = ward.objects.all()
@@ -119,4 +116,10 @@ class ward_view(viewsets.ModelViewSet):
     permission_classes = (AllowAny,)
     # search_fields = ["area_name"]
     filter_fields = ["area_id",]
+
+
+
+
+
+
 

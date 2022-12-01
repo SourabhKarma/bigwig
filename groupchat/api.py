@@ -2,15 +2,17 @@ from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
-from django.http import HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from rest_framework.permissions import IsAuthenticated
 from django_filters import filterset
-
+from rest_framework import generics
 from user.models import User
-
+from .filters import MessageFilter
 from .models import GroupModel,GroupChatModel, Message
 from .serializer import GroupSerializer,GroupChatSerializer,GroupListSerializer,MessageSerializer
 from .permissions import IsInGroup
+from django_filters import rest_framework as filters
+from rest_framework.exceptions import ValidationError
 # Create your views here.
 
 
@@ -58,9 +60,24 @@ class GroupListView(viewsets.ModelViewSet):
 class MessageView(viewsets.ModelViewSet):
 
 
-    queryset = Message.objects.all()
+    queryset = Message.objects.all().exclude(groupInt__iexact=None)
     serializer_class = MessageSerializer
-    filter_fields = ["groupInt","groupid"]
+    filter_fields = ["groupid"]
+    # def get_queryset(self):
+    #     # queryset = Message.objects.filter(groupInt__isnull=False)
+    #     queryset = Message.objects.all().exclude(groupInt__iexact=None)
+
+    #     print(queryset)
+
+    #     if  queryset.exists():
+    #         print(queryset)
+    #         return queryset
+
+    #         # raise Response(status=status.HTTP_204_NO_CONTENT)
+    #         # raise ValidationError({"error": ["You don't have enough permission."]})
+    #     else:
+    #         # return queryset
+    #         raise ValidationError({"error": ["You don't have enough permission."]})
 
 
 
