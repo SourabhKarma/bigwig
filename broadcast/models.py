@@ -1,4 +1,4 @@
-# from django.db import models
+from django.db import models
 # from fcm_django.models import FCMDevice
 
 # from firebase_admin.messaging import Message
@@ -30,7 +30,28 @@
 #                   data=data)
 
 
-from fcm_django.models import FCMDevice
+from fcm_django.models import FCMDevice,AbstractFCMDevice
+
+
+
+
+class CustomFCMDevice(AbstractFCMDevice):
+    language = models.CharField(max_length=35, blank=False)
+    position = models.CharField(max_length=35, blank=False)
+    app_version = models.CharField(max_length=35, blank=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def send_notification(user_id, title, message, data):

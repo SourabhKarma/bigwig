@@ -34,11 +34,11 @@ class area(models.Model):
 
         super(area, self).save(*args, **kwargs)
 
-    def __str__(self):
-        a = self.area_name
-        b = a.decode("ascii")
+    # def __str__(self):
+    #     a = self.area_name
+    #     b = a.decode("ascii")
 
-        return base64.b64decode(a, 'utf-8')
+    #     return base64.b64decode(a, 'utf-8')
         # area_name  = str(self.area_name)    
         # return  base64.urlsafe_b64decode(area_name).decode("utf-8","ignore")
 

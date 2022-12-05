@@ -87,14 +87,43 @@ class areab(viewsets.ViewSet):
 
 
 
+response = [
+    {
+        "id": 1,
+        "area_name": "b'YQ=='"
+    },
+    {
+        "id": 2,
+        "area_name": "b'YQ=='"
+    },
+    {
+        "id": 3,
+        "area_name": "b'YQ=='"
+    },
+    {
+        "id": 4,
+        "area_name": "b'Z2g='"  
+    }
+]
+
+
+
+a = []
 
 
 
 class area_view(viewsets.ModelViewSet):
-    queryset = area.objects.all()
+    queryset = area.objects.filter().only('area_name')
+    print(queryset)
     serializer_class = area_serializer
     permission_classes = (AllowAny,)
     filter_fields = ["area_name",]
+
+
+
+
+
+
     # ordering_fields = '__all__'
     # renderer_classes = (JSONRenderer,)
     # def get(self,request):

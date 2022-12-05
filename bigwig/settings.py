@@ -62,6 +62,9 @@ INSTALLED_APPS = [
     'videocall',
     'broadcast',
     'fcm_django',
+    'writenest',
+    "push_notifications",
+    "pyfcm",
 
     'location_field.apps.DefaultConfig',
 ]
@@ -162,6 +165,12 @@ FCM_DJANGO_SETTINGS = {
 
 
 
+
+PUSH_NOTIFICATIONS_SETTINGS = {
+        "FCM_API_KEY": "AAAAu8rHslg:APA91bEUPY8PDJOGFu1VVY3sPeMC7Fr613MHOxDLEBJe1TjowBvKcUTtpRrpF7a6nZMX4Ivme9Pie43pHkiYAItsD0PMlgsHGsL3ggroh1T57DzDtMWP0oJAz3z35bFHNNkuEDSXhOAI",
+        "GCM_API_KEY": "[your api key]",
+        "APNS_CERTIFICATE": "/path/to/your/certificate.pem",
+}
 
 
 

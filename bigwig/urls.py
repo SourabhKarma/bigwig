@@ -160,8 +160,13 @@ router.register(r'ads',AdvertisementView)
 router.register(r'userlist',UserListView)
 
 
+# witable
 
+from writenest.api import TeslaModelListCreateAPIView,CountryNameListCreateAPIView
 
+router.register(r'write1',TeslaModelListCreateAPIView)
+
+router.register(r'write2',CountryNameListCreateAPIView)
 
 
 
@@ -170,6 +175,16 @@ router.register(r'userlist',UserListView)
 from groupchat.api import RegisterFilterAPIView
 
 router.register(r'uuid',RegisterFilterAPIView,basename="uuid")
+
+
+
+
+
+from broadcast.views import send_noti
+
+
+
+
 
 
 urlpatterns = [
@@ -201,6 +216,11 @@ urlpatterns = [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     # path('api/uuid',RegisterFilterAPIView.as_view())
     # path("eventdouble/",eventdoubleview.as_view()),
+
+    path('noti/', send_noti, name='send_noti'),
+
+
+
 ]
 
 
