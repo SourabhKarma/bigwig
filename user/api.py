@@ -357,10 +357,70 @@ class ResendOtpView(APIView):
 
 
 
-# login
+
+# ------------ firebase token replace login start ---------------------------------------
+
+
+class UserLoginViewFirebaseTokenReplace(APIView):
+    serializer_class = UserLoginSerializer
+    permission_classes = (AllowAny, )
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        valid = serializer.is_valid(raise_exception=True)
+        # User = serializer.data['email']
+        if valid:
+            status_code = status.HTTP_200_OK
 
 
 
+            em = serializer.data['email']
+            userf = User.objects.filter(email = em)
+            print(request.data["email"],"asasa")
+            # userf = userf.first()
+            # userf.firebasetoken = True
+            # userf.save()
+            response = {
+                'success': True,
+                'statusCode': status_code,
+                'message': 'User logged in successfully',
+                'access': serializer.data['access'],
+                'refresh': serializer.data['refresh'],
+                'authenticatedUser': {
+                    'email': serializer.data['email'],
+                    # 'id':User.pk
+                    # 'id': self.request.user.id
+                    'role_id': serializer.data['role_id'], 
+                    'user_id': serializer.data['user_id'], 
+                    'is_verified':serializer.data['is_verified'],
+                    'user_photo':serializer.data['user_photo'],
+
+                }
+            }
+
+            return Response(response, status=status_code)
+
+
+
+
+
+
+# ------------ firebase token replace login end ---------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# login ------------------------------------------------------------------------
 
 
 

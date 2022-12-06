@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from .serializers import FcmSerializer
 
-
+from .models import NotiModel
 
 
 
@@ -38,10 +38,24 @@ def send_notification(registration_id,message_title, message_body):
       raise exception
 
 def send_noti(request):
-    device_token = ["f7rIzMRS-tl75bWr3FzlA6:APA91bEHq2_gsg4iudkRSsqvnFpwGKwOEPQ6XMZ5rSPifn4Zek81BKETe7tnqus2m3qQJwkVjpCxs-gJTNOywRwe_RXyIU11-E3pkfWRH4XrbzEQWptI0ZVPu3Mh50g55TdP3rNyV9qm",
-    "chYYTVFRF6gPKWmL1VFuq1:APA91bHhZTeq2FV829-IW0E459H3iHlCgLb4Ewl7twQAunS4GJ8rAVqwb2jW_1tpGY3-nxjmdfis8xd-arq-uqa4jitN44HRjRSw6tdJItTbRx8bxMVf-Q6rFs4PaqFqeKTRDaEKh6z5",
-    "c837DoLxIyiPKGSI6MOyp0:APA91bEcLV11wmKcwtW0azMYOXgslPeQ81ww0INEoq4cRNuho0auhtLcTrmi8W-79WXOeUkrC9tB6Npfwmf2vINA2AjigvwqaYJH-JrQoLZHwC8MSrNhQFNUi57tvUhVJh7DZjCPt5tK",
-    ]
-    send_notification(device_token,"bigwig","added")
-    return JsonResponse({"status": "success"}, safe=False)
+   queryset =list(NotiModel.objects.values_list('device_key', flat=True))
+   single_user = list(NotiModel.objects.filter(name = 'device2').values_list('device_key',flat=True))
+   print(single_user)
+   #index of 0 of user list is passing in group list index to remove that particular user id notification
+   single_user.remove(single_user[0])
+
+   # single_user.remove('chYYTVFRF6gPKWmL1VFuq1:APA91bHhZTeq2FV829-IW0E459H3iHlCgLb4Ewl7twQAunS4GJ8rAVqwb2jW_1tpGY3-nxjmdfis8xd-arq-uqa4jitN44HRjRSw6tdJItTbRx8bxMVf-Q6rFs4PaqFqeKTRDaEKh6z5')
+   print(single_user)
+
+   # print(queryset)
+
+
+
+   #  a = list(queryset)
+   #  print(a)
+   #  device_token = ["tl75bWr3FzlA6:APA91bEHq2_gsg4iudkRSsqvnFpwGKwOEPQ6XMZ5rSPifn4Zek81BKETe7tnqus2m3qQJwkVjpCxs-gJTNOywRwe_RXyIU11-E3pkfWRH4XrbzEQWptI0ZVPu3Mh50g55TdP3rNyV9qm"
+   #  ]
+   device_token = queryset
+   send_notification(device_token,"bigwig","added")
+   return JsonResponse({"status": "success"}, safe=False)
 

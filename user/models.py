@@ -59,6 +59,9 @@ class User(AbstractUser):
     updated_by = models.CharField(max_length=255,null=True,blank=True)
     # is_active = models.BooleanField(default=False,)
     image_url = models.TextField(null=True,blank=True)
+    # image_urls = models.TextField(null=True,blank=True)
+
+    # notification_tokenss = models.CharField(max_length=200,null=True,blank=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomFCMDevice
+from .models import CustomFCMDevice,NotiModel
 
 
 

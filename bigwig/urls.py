@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from user.api import UserRegistrationView,LogoutView,UserListView
+from user.api import UserRegistrationView,LogoutView,UserListView,UserLoginViewFirebaseTokenReplace
 from user.api import UserVerifyView,ResendOtpView,UserLoginView,CreateUserView,ResetPasswordView,ResetPasswordView2
 from django.conf.urls.i18n import i18n_patterns
 from rest_framework import routers
@@ -198,6 +198,7 @@ urlpatterns = [
     path('api/otp/resend',ResendOtpView.as_view()),
     path('api/resetpassword',ResetPasswordView2.as_view()),
 
+    path('api/firebaselogin',UserLoginViewFirebaseTokenReplace.as_view()),
 
 
 
