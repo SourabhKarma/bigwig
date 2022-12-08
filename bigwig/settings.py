@@ -61,9 +61,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'videocall',
     'broadcast',
-    'fcm_django',
+    # 'fcm_django',
     'writenest',
-    "push_notifications",
+    # "push_notifications",
     "pyfcm",
 
     'location_field.apps.DefaultConfig',

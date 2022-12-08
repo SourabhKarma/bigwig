@@ -179,9 +179,9 @@ router.register(r'uuid',RegisterFilterAPIView,basename="uuid")
 
 
 
-
+#extra
 from broadcast.views import send_noti
-
+from groupchat.api import GroupRemoveView
 
 
 
@@ -199,7 +199,7 @@ urlpatterns = [
     path('api/resetpassword',ResetPasswordView2.as_view()),
 
     path('api/firebaselogin',UserLoginViewFirebaseTokenReplace.as_view()),
-
+    path('api/v1/remove',GroupRemoveView.as_view()),
 
 
     path('api/v1/',include(router.urls)),

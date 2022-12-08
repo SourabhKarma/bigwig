@@ -76,3 +76,6 @@ class TeslaModelSerializer(serializers.ModelSerializer):
         for data in origin_data:
             CountryName1.objects.create(**data)
         return tesla
+
+
+

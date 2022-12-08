@@ -33,15 +33,15 @@ from django.dispatch import receiver
 #                   data=data)
 
 
-from fcm_django.models import FCMDevice,AbstractFCMDevice
+# from fcm_django.models import FCMDevice,AbstractFCMDevice
 
 
 
 
-class CustomFCMDevice(AbstractFCMDevice):
-    language = models.CharField(max_length=35, blank=False)
-    position = models.CharField(max_length=35, blank=False)
-    app_version = models.CharField(max_length=35, blank=False)
+# class CustomFCMDevice(AbstractFCMDevice):
+#     language = models.CharField(max_length=35, blank=False)
+#     position = models.CharField(max_length=35, blank=False)
+#     app_version = models.CharField(max_length=35, blank=False)
 
 
 

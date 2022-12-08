@@ -376,7 +376,8 @@ class UserLoginViewFirebaseTokenReplace(APIView):
 
             em = serializer.data['email']
             userf = User.objects.filter(email = em)
-            print(request.data["email"],"asasa")
+            print(userf)
+            print(request.data["email"])
             # userf = userf.first()
             # userf.firebasetoken = True
             # userf.save()

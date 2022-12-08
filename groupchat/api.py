@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render
 from rest_framework import viewsets
 from rest_framework.response import Response
@@ -130,3 +131,61 @@ class RegisterFilterAPIView(viewsets.ModelViewSet):
         print(cache.get("token"))
 
         return Response({'ticket_uuid': ticket_uuid})
+
+
+
+
+
+
+
+
+# ----------------------- remove user from group start -----------------------
+
+from .serializer import GroupRemoveSerializer
+import jwt
+
+class GroupRemoveView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+
+    def post(self, request):
+        serializer = GroupRemoveSerializer
+        data  =  request.data
+        grouplist = list(GroupModel.objects.filter(id = data["groupid"]).values_list('group_members',flat =True ))
+        print(grouplist)
+
+
+
+        auth_data = request.META["HTTP_AUTHORIZATION"]
+        token = str.replace(str(auth_data), 'Bearer ', '')
+        token_user_id= jwt.decode(token ,settings.SECRET_KEY,algorithms='HS256')
+        print(token_user_id["user_id"])
+
+        if int(data["userid"]) in grouplist and token_user_id["user_id"] == int(data["userid"]):
+
+            grouplist.remove(int(data["userid"]))
+            print(grouplist)
+
+            group = GroupModel.objects.filter(id = data["groupid"])
+            print(group)
+            group = group.first()
+            group.group_members.set(grouplist)
+
+        else:
+
+            return JsonResponse({"message":"user not present in  the group"},status=status.HTTP_400_BAD_REQUEST)
+
+
+        # group = GroupModel.objects.filter(id = data["groupid"])
+        # print(group)
+        # group = group.first()
+        # print(group.group_members.set(grouplist))
+
+
+        return JsonResponse({"message":"user removed from group"}) 
+
+
+
+
+
+# ----------------------- remove user from group end -----------------------

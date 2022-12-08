@@ -1,12 +1,12 @@
 from rest_framework import serializers
-from .models import CustomFCMDevice,NotiModel
+# from .models import CustomFCMDevice,NotiModel
 
 
 
 
 
 
-class FcmSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomFCMDevice
-        fields = "__all__"
+# class FcmSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = CustomFCMDevice
+#         fields = "__all__"

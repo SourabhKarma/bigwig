@@ -35,3 +35,11 @@ class MessageSerializer(serializers.ModelSerializer):
         fields ='__all__'
 
 
+
+
+
+
+
+class GroupRemoveSerializer(serializers.ModelSerializer):
+    groupid = serializers.CharField()
+    userid = serializers.CharField()
