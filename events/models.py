@@ -46,8 +46,18 @@ class EventModel(models.Model):
 
 class EventlikeModel(models.Model):
 
+
+    Yes = 0
+    No = 1
+    Maybe = 2
+
+    EVENT_CHOICES = [(Yes,"YES"),(No,"NO"),(Maybe,"MAYBE")]
+
+
+
+
     userid = models.ForeignKey("user.User",null=True,blank=True,on_delete=models.DO_NOTHING)
-    eventid = models.ForeignKey(EventModel,null=True,blank=True,on_delete=models.DO_NOTHING)
+    eventid = models.ForeignKey(EventModel,null=True,blank=True,on_delete=models.DO_NOTHING,related_name="event_count")
     event_choice = models.IntegerField(max_length=10,null=True,blank=True,choices=EVENT_CHOICES)
     # event_yes = models.IntegerField(null=True,blank=True,default=0)
     # event_no = models.IntegerField(null=True,blank=True,default=0)

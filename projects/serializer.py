@@ -12,6 +12,19 @@ class ProjectTaskSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+
+
+class ProjectAcceptSerialzer(serializers.ModelSerializer):
+    projectid = serializers.IntegerField()
+    userid = serializers.IntegerField()
+
+
+
+
+
+
+
 # update
 
 

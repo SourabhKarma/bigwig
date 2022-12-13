@@ -32,7 +32,7 @@ from rest_framework_simplejwt.views import (
 
 # import project
 
-from projects.api import ProjectView,ProjectTaskView,ProjectInviteView
+from projects.api import ProjectView,ProjectTaskView,ProjectInviteView,ProjectAddView
 
 # import stories
 
@@ -119,6 +119,7 @@ router.register(r'feedback',FeedBackView)
 router.register(r'projects',ProjectView)
 router.register(r'projectask',ProjectTaskView)
 router.register(r'projectinvite',ProjectInviteView)
+# router.register(r'projectadd',ProjectAddView)
 
 
 
@@ -162,12 +163,13 @@ router.register(r'userlist',UserListView)
 
 # witable
 
-from writenest.api import TeslaModelListCreateAPIView,CountryNameListCreateAPIView
+from writenest.api import TeslaModelListCreateAPIView,CountryNameListCreateAPIView,CountryView
 
 router.register(r'write1',TeslaModelListCreateAPIView)
 
 router.register(r'write2',CountryNameListCreateAPIView)
 
+# router.register(r'country',CountryView)
 
 
 
@@ -220,8 +222,9 @@ urlpatterns = [
 
     path('noti/', send_noti, name='send_noti'),
 
+    path('api/v1/country',CountryView.as_view()),
 
-
+    path('api/v1/projectadd',ProjectAddView.as_view())
 ]
 
 

@@ -36,7 +36,7 @@ class ProjectModel(models.Model):
        status = models.IntegerField(null=True,blank=True,choices=PROJECT_CHOICES,default=0)
        created  = models.DateTimeField(auto_created=True,auto_now=True)
        created_by = models.ForeignKey("user.User",null=True,blank=True,on_delete=models.DO_NOTHING,related_name="projectowner")
-       # project_member = models.ManyToManyField("user.User")
+       project_member = models.ManyToManyField("user.User",related_name="project_members")
 
 
        def __str__(self):

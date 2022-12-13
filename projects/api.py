@@ -98,3 +98,63 @@ class ProjectInviteView(viewsets.ModelViewSet):
     queryset = ProjectInvite.objects.all()
 
     serializer_class = ProjectInviteSerializer
+
+
+
+
+
+
+
+# ----------------------- project accept S ------------------
+
+from rest_framework.views import APIView
+from django.conf import settings
+
+from .serializer import ProjectAcceptSerialzer
+import jwt
+
+class ProjectAddView(APIView):
+    permission_classes = (IsAuthenticated,)
+
+
+    def post(self, request):
+        serializer = ProjectAcceptSerialzer
+        data  =  request.data
+        projectlist = list(ProjectModel.objects.filter(id = data["projectid"]).values_list('project_member',flat =True ))
+        print(projectlist)
+
+
+
+        # auth_data = request.META["HTTP_AUTHORIZATION"]
+        # token = str.replace(str(auth_data), 'Bearer ', '')
+        # token_user_id= jwt.decode(token ,settings.SECRET_KEY,algorithms='HS256')
+        # print(token_user_id["user_id"])
+
+        # if int(data["userid"]) in grouplist and token_user_id["user_id"] == int(data["userid"]):
+        if data["userid"] in projectlist:
+
+
+            projectlist.append(data["userid"])
+            print(projectlist)
+
+            group = ProjectModel.objects.filter(id = data["projectid"])
+            print(group)
+            group = group.first()
+            group.project_member.set(projectlist)
+
+        else:
+
+            return JsonResponse({"message":"user not added in project"},status=status.HTTP_400_BAD_REQUEST)
+
+
+        # group = GroupModel.objects.filter(id = data["groupid"])
+        # print(group)
+        # group = group.first()
+        # print(group.group_members.set(grouplist))
+
+
+        return JsonResponse({"message":"user removed from group"}) 
+
+
+
+# ------------------------- project accept E -----------------

@@ -27,12 +27,12 @@ class EventLikeView(viewsets.ModelViewSet):
     filter_fields = ["event_choice"]
     # search_filter = ["intrested_user"]    
 
-    def list(self, request):
-        queryset = EventlikeModel.objects.filter(userid = self.request.user)
-        # queryset = EventlikeModel.objects.filter()
+    # def list(self, request):
+    #     queryset = EventlikeModel.objects.filter(userid = self.request.user)
+    #     # queryset = EventlikeModel.objects.filter()
 
-        serializer = EventLikeSerializer(queryset, many=True)
-        return Response(serializer.data)
+    #     serializer = EventLikeSerializer(queryset, many=True)
+    #     return Response(serializer.data)
 
 
 
