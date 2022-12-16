@@ -114,7 +114,7 @@ from .serializer import ProjectAcceptSerialzer
 import jwt
 
 class ProjectAddView(APIView):
-    permission_classes = (IsAuthenticated,)
+    # permission_classes = (IsAuthenticated,)
 
 
     def post(self, request):
@@ -131,7 +131,7 @@ class ProjectAddView(APIView):
         # print(token_user_id["user_id"])
 
         # if int(data["userid"]) in grouplist and token_user_id["user_id"] == int(data["userid"]):
-        if data["userid"] in projectlist:
+        if data["userid"] not in projectlist:
 
 
             projectlist.append(data["userid"])
@@ -144,7 +144,7 @@ class ProjectAddView(APIView):
 
         else:
 
-            return JsonResponse({"message":"user not added in project"},status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"message":"user already in project"},status=status.HTTP_400_BAD_REQUEST)
 
 
         # group = GroupModel.objects.filter(id = data["groupid"])
@@ -153,7 +153,7 @@ class ProjectAddView(APIView):
         # print(group.group_members.set(grouplist))
 
 
-        return JsonResponse({"message":"user removed from group"}) 
+        return JsonResponse({"message":"added in group"}) 
 
 
 
