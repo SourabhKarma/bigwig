@@ -59,7 +59,7 @@ from polls.api import votevalidateview
 
 #api import
 from location.api import area_view,ward_view,areab
-from dashboard.api import VideoView,FeedCommentView,FeedView,FeedCommentView,FeedlikeView
+from dashboard.api import VideoView,FeedCommentView,FeedView,FeedCommentView,FeedlikeView,DashboardView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -187,7 +187,7 @@ from groupchat.api import GroupRemoveView
 
 
 
-
+from dashboard.api import UserActivity
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -224,7 +224,15 @@ urlpatterns = [
 
     path('api/v1/country',CountryView.as_view()),
 
-    path('api/v1/projectadd',ProjectAddView.as_view())
+    path('api/v1/projectadd',ProjectAddView.as_view()),
+
+    # dashboard api 
+    path('api/v1/dashboardapi',DashboardView.as_view()),
+    path('api/v1/useractivity',UserActivity.as_view()),
+
+
+
+
 ]
 
 

@@ -39,7 +39,7 @@ class User(AbstractUser):
     otp = models.CharField(max_length=6,null=True,blank=True)
 
     
-    first_name = models.CharField(max_length=255,null=True,blank=True)
+    first_name = models.CharField(max_length=256,null=True,blank=True)
     last_name= models.CharField(max_length=255,null=True,blank=True)
     user_photo = models.FileField(null=True,blank=True,default='index.png')
     gender= models.CharField(max_length=255,null=True,blank=True)
@@ -60,6 +60,7 @@ class User(AbstractUser):
     # is_active = models.BooleanField(default=False,)
     image_url = models.TextField(null=True,blank=True)
     # image_urls = models.TextField(null=True,blank=True)
+    # i = models.CharField(max_length=100)
 
     # notification_tokenss = models.CharField(max_length=200,null=True,blank=True)
 
@@ -88,7 +89,8 @@ class User(AbstractUser):
 
 
 
-
+    # class Meta:
+    #     db_table = "bigwig_user"
 
 
 
